@@ -32,6 +32,7 @@ def checkweather():
     data = json.loads(response.text)
     currentweather = data['main']['temp']
     weatherpic = data['weather'][0]['description']
+
     if 'clouds' in weatherpic:
         if hour < 5:
             weathericon = ImageTk.PhotoImage(file='C:\\weatherpics\scatteredcloudsdayornight.png')
@@ -52,7 +53,7 @@ def checkweather():
             weatherlabel.grid(row=2, column=0)
     if 'rain' in weatherpic:
         if hour < 5 or hour > 20:
-            weathericon = ImageTk.PhotoImage(file='C:\\weatherpics\\rainnight.png.png')
+            weathericon = ImageTk.PhotoImage(file='C:\\weatherpics\\rainnight.png')
             weatherlabel = Label(root, image=weathericon, height=125, bg='purple')
             weatherlabel.grid(row=2, column=0)
         elif hour >= 5 and hour <= 20:
@@ -77,6 +78,15 @@ def checkweather():
             weathericon = ImageTk.PhotoImage(file='C:\\weatherpics\\thunderstorm.png')
             weatherlabel = Label(root, image=weathericon, height=125, bg='#FFAE42')
             weatherlabel.grid(row=2, column=0)
+    if weatherpic == 'mist':
+        if hour < 5 or hour > 20:
+            weathericon = ImageTk.PhotoImage(file='C:\\weatherpics\\misty.png')
+            weatherlabel = Label(root, image=weathericon, height=125, bg='purple')
+            weatherlabel.grid(row=2, column=0)
+        elif hour >= 5 and hour <= 20:
+            weathericon = ImageTk.PhotoImage(file='C:\\weatherpics\\misty.png')
+            weatherlabel = Label(root, image=weathericon, height=125, bg='#FFAE42')
+            weatherlabel.grid(row=2, column=0)
 # finish up all of the weather descriptions and using datetime module, fix up background
     tempslider = Scale(root, from_=0, to=100, orient=HORIZONTAL)
     tempslider.set(currentweather)
@@ -87,4 +97,3 @@ weatherbtn = Button(root, text='Check Weather', width=50, height=3, borderwidth=
 weatherbtn.grid(row=3, column=0, columnspan=2)
 
 root.mainloop()
-#temperature check
